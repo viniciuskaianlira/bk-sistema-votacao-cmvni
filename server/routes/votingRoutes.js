@@ -1,5 +1,5 @@
 import express from 'express';
-import { authenticate, authorize } from './middleware/authMiddleware.js'; // Importa os middlewares de autenticação e autorização
+import { authenticate, authorize } from '../middleware/authMiddleware.js'; // Importa os middlewares de autenticação e autorização
 
 const router = express.Router();
 

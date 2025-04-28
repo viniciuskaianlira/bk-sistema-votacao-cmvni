@@ -5,6 +5,7 @@ export const getCargos = async (req, res) => {
     const cargos = await Cargo.getAll();
     res.json(cargos);
   } catch (error) {
+    console.error("Erro ao buscar cargos:", error); // Mostra o erro real no console
     res.status(500).json({ error: "Erro ao buscar cargos" });
   }
 };
@@ -20,3 +21,4 @@ export const createCargo = async (req, res) => {
     res.status(500).json({ error: "Erro ao criar cargo" });
   }
 };
+

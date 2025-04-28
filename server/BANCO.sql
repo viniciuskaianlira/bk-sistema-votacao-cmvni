@@ -326,3 +326,19 @@ ALTER TABLE legislatura ADD COLUMN numero INT NOT NULL UNIQUE;
 
 ALTER TABLE vereadores ADD COLUMN legislatura_id INT NOT NULL;
 ALTER TABLE vereadores ADD FOREIGN KEY (legislatura_id) REFERENCES legislatura(id) ON DELETE CASCADE;
+
+
+CREATE TABLE Cargos (
+    IdCargo INT AUTO_INCREMENT PRIMARY KEY,
+    NomeCargo VARCHAR(100) NOT NULL,
+    NivelAcesso INT NOT NULL,
+    Descricao TEXT,
+    Ativo BOOLEAN DEFAULT TRUE,
+    DataCriacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    DataAtualizacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+INSERT INTO Cargos (NomeCargo, NivelAcesso, Descricao) VALUES
+('Presidente da Câmara', 1, 'Responsável por dirigir os trabalhos legislativos e administrativos'),
+('Vereador', 2, 'Membro do legislativo municipal, com direito a voto nas sessões'),
+('Secretário', 2, 'Responsável por secretariar as sessões e os trabalhos legislativos');

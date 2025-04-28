@@ -2,12 +2,13 @@ import pool from "../config/db.js";
 
 class Cargo {
   static async getAll() {
-    const [rows] = await pool.query("SELECT * FROM cargos");
+    const [rows] = await pool.query("SELECT * FROM Cargos");
+    console.log(rows);
     return rows;
   }
 
   static async create(nome) {
-    const [result] = await pool.query("INSERT INTO cargos (nome) VALUES (?)", [nome]);
+    const [result] = await pool.query("INSERT INTO Cargos (nome) VALUES (?)", [nome]);
     return result.insertId;
   }
 }
