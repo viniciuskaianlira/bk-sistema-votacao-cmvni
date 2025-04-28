@@ -342,3 +342,8 @@ INSERT INTO Cargos (NomeCargo, NivelAcesso, Descricao) VALUES
 ('Presidente da Câmara', 1, 'Responsável por dirigir os trabalhos legislativos e administrativos'),
 ('Vereador', 2, 'Membro do legislativo municipal, com direito a voto nas sessões'),
 ('Secretário', 2, 'Responsável por secretariar as sessões e os trabalhos legislativos');
+
+
+
+SET PASSWORD FOR 'root'@'localhost' = PASSWORD('Camara2022/');
+ALTER USER 'root'@'localhost' IDENTIFIED VIA mysql_native_password USING PASSWORD('Camara2022/');
