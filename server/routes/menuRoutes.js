@@ -2,6 +2,7 @@
 import express from 'express';
 import { MENU_MAP } from '../utils/menu.js';
 import { verifyToken } from '../middleware/auth.js';
+import { pool } from '../config/db.js';
 
 const router = express.Router();
 
