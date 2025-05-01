@@ -1,4 +1,4 @@
-import pool from "../config/db.js";
+import { pool } from '../config/db.js'
 
 class Ato {
   static async create({ numero, usuario_id, tipo_ato_id, protocolo_id }) {

@@ -1,4 +1,4 @@
-import pool from "../config/db.js";
+import { pool } from '../config/db.js'
 
 class Indicacao {
     static async create(numero, texto, justificativa, usuario_id, promponente_id, protocolo_id) {

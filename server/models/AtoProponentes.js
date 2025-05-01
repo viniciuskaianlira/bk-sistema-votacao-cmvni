@@ -1,4 +1,4 @@
-import pool from "../config/db.js";
+import { pool } from '../config/db.js'
 
 class AtoProponentes {
   static async addProponente({ ato_id, vereador_id }) {

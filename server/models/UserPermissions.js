@@ -1,4 +1,4 @@
-import pool from "../config/db.js";
+import { pool } from '../config/db.js'
 
 class UserPermissions {
   // Método para associar um usuário a um papel (role)

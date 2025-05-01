@@ -1,4 +1,4 @@
-import pool from "../config/db.js";
+import { pool } from '../config/db.js'
 
 class Oficio {
   static async addOficio({ numero, destino, arquivo_pdf, nome_arquivo, para_executivo, data_recebimento_executivo }) {

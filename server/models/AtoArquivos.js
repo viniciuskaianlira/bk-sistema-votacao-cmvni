@@ -1,4 +1,4 @@
-import pool from "../config/db.js";
+import { pool } from '../config/db.js'
 
 class AtoArquivos {
   static async addArquivo({ ato_id, arquivo_pdf, nome_arquivo }) {

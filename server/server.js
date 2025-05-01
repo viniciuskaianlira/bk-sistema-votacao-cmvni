@@ -6,6 +6,7 @@ import { setupWebSocket } from "./websocket.js";
 
 import loginRoutes from "./routes/loginRoutes.js";
 import cargoRoutes from "./routes/cargoRoutes.js";
+import sessaoRoutes from "./routes/sessaoRoutes.js";
 import votingRoutes from './routes/votingRoutes.js'; // Rota exemplo de autenticação e permissão;
 
 import menuRoutes from './routes/menuRoutes.js';
@@ -23,6 +24,7 @@ app.use('/api', loginRoutes);
 app.use('/api', menuRoutes);
 app.use('/api/voting', votingRoutes);
 app.use("/api/cargos", cargoRoutes);
+app.use("/api/sessao_legislativa", sessaoRoutes);
 
 // Inicializa WebSockets
 setupWebSocket(server);

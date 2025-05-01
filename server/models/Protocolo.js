@@ -1,4 +1,4 @@
-import pool from "../config/db.js";
+import { pool } from '../config/db.js'
 
 class Protocolo {
     static async create(tipo_protocolo, data_protocolo = null) {

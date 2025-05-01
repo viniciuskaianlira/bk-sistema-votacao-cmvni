@@ -347,3 +347,22 @@ INSERT INTO Cargos (NomeCargo, NivelAcesso, Descricao) VALUES
 
 SET PASSWORD FOR 'root'@'localhost' = PASSWORD('Camara2022/');
 ALTER USER 'root'@'localhost' IDENTIFIED VIA mysql_native_password USING PASSWORD('Camara2022/');
+
+
+INSERT INTO legislatura (numero, data_inicio, data_fim)
+VALUES (9, '2025-01-01', '2028-12-31');
+
+INSERT INTO vereadores (user_id, legislatura_id, partido, sigla_partido)
+VALUES (1, 1, 'Partido Exemplar', 'PEX');
+
+INSERT INTO sessao_legislativa (numero, data_sessao, tipo, presidida_id) VALUES
+  (1,  '2025-05-05 14:00:00', 'ORDINÁRIA',     1),
+  (2,  '2025-05-12 14:00:00', 'EXTRAORDINÁRIA', 1),
+  (3,  '2025-05-19 14:00:00', 'SOLENE',         1),
+  (4,  '2025-05-26 14:00:00', 'PÚBLICA',        1),
+  (5,  '2025-06-02 14:00:00', 'ORDINÁRIA',      1),
+  (6,  '2025-06-09 14:00:00', 'EXTRAORDINÁRIA', 1),
+  (7,  '2025-06-16 14:00:00', 'SOLENE',         1),
+  (8,  '2025-06-23 14:00:00', 'PÚBLICA',        1),
+  (9,  '2025-06-30 14:00:00', 'ORDINÁRIA',      1),
+  (10, '2025-07-07 14:00:00', 'ORDINÁRIA',      1);
