@@ -20,7 +20,7 @@ export const MENU_MAP = {
     { label: 'Cargo', path: '/cargos', icon: 'fas fa-id-badge' },
     { label: 'Histórico de Protocolos', path: '/historico-protocolos', icon: 'fas fa-history' },
     { label: 'Legislatura', path: '/legislaturas', icon: 'fas fa-landmark' },
-    { label: 'Mesa Diretora', path: '/mesa-diretora', icon: 'fas fa-table' },
+    { label: 'Mesa Diretora', path: '/mesadiretora', icon: 'fas fa-table' },
     { label: 'Ofícios Recebidos', path: '/oficios-recebidos', icon: 'fas fa-inbox' },
     { label: 'Ofícios', path: '/oficios', icon: 'fas fa-file-signature' },
     { label: 'Presença Sessões', path: '/presenca-sessoes', icon: 'fas fa-user-check' },

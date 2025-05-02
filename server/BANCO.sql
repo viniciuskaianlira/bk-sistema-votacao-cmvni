@@ -312,6 +312,20 @@ INSERT INTO roles (role_name) VALUES
 INSERT INTO users (nome, username, password, ativo) 
 VALUES ('Administrador', 'admin', '$2a$12$xLt1tqHT8MW6auINrHTgpOolILI47dNJHn7XdeM6M1ujmbIimjWwy', TRUE);
 
+INSERT INTO users (nome, username, password, ativo) VALUES
+  ('João Silva',        'joaosilva',   '$2a$12$xLt1tqHT8MW6auINrHTgpOolILI47dNJHn7XdeM6M1ujmbIimjWwy', TRUE),
+  ('Maria Oliveira',    'moliveira',   '$2a$12$xLt1tqHT8MW6auINrHTgpOolILI47dNJHn7XdeM6M1ujmbIimjWwy', TRUE),
+  ('Pedro Souza',       'psouza',      '$2a$12$xLt1tqHT8MW6auINrHTgpOolILI47dNJHn7XdeM6M1ujmbIimjWwy', TRUE),
+  ('Ana Lima',          'alima',       '$2a$12$xLt1tqHT8MW6auINrHTgpOolILI47dNJHn7XdeM6M1ujmbIimjWwy', TRUE),
+  ('Bruno Ferreira',    'bferreira',   '$2a$12$xLt1tqHT8MW6auINrHTgpOolILI47dNJHn7XdeM6M1ujmbIimjWwy', TRUE),
+  ('Carla Santos',      'csantos',     '$2a$12$xLt1tqHT8MW6auINrHTgpOolILI47dNJHn7XdeM6M1ujmbIimjWwy', TRUE),
+  ('Diego Costa',       'dcosta',      '$2a$12$xLt1tqHT8MW6auINrHTgpOolILI47dNJHn7XdeM6M1ujmbIimjWwy', TRUE),
+  ('Fernanda Rocha',    'frocha',      '$2a$12$xLt1tqHT8MW6auINrHTgpOolILI47dNJHn7XdeM6M1ujmbIimjWwy', TRUE),
+  ('Rafael Almeida',    'ralmeida',    '$2a$12$xLt1tqHT8MW6auINrHTgpOolILI47dNJHn7XdeM6M1ujmbIimjWwy', TRUE);
+
+
+
+
 -- Obtendo o ID do usuário admin recém-criado
 SET @admin_id = LAST_INSERT_ID();
 

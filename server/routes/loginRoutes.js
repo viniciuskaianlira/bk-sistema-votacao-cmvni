@@ -10,7 +10,6 @@ router.post('/login', async (req, res) => {
   try {
     const [rows] = await pool.query('SELECT * FROM users u JOIN user_permissions up ON up.user_id = u.id JOIN roles r ON r.id = up.role_id WHERE u.username = ?;', [username]);
     const user = rows[0];
-    console.log(user);
     // loginRoutes.js
     if (user && comparePassword(password, user.password)) {
       // user.role deve vir do DB: ex: rows[0].role_name

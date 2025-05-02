@@ -1,4 +1,5 @@
 import { verifyToken } from './auth.js';
+import { pool } from '../config/db.js';
 
 export const authenticate = (req, res, next) => {
   const token = req.header('Authorization')?.replace('Bearer ', '');
@@ -30,7 +31,7 @@ export const authorize = (requiredRoles) => {
       `;
       
       // Executa a consulta ao banco para obter as permissões do usuário
-      const [rows] = await db.execute(query, [userId]);
+      const [rows] = await pool.execute(query, [userId]);
       
       if (rows.length === 0) {
         return res.status(403).json({ message: 'Permissões não encontradas para este usuário' });
