@@ -1,4 +1,4 @@
-import PresencaSessao from "../models/presencaSessaoModel.js";
+import PresencaSessao from "../models/PresencaSessao.js";
 
 class PresencaSessaoController {
 
