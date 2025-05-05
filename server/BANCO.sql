@@ -378,4 +378,3 @@ INSERT INTO sessao_legislativa (numero,data_sessao,tipo,presidida_id) VALUES
 UPDATE users
 SET password = '$2a$10$g1OoSZum0ZWrve8aDIzY2O45M9shXY1khr8He3kVZtPTk5J52Gs/2'
 WHERE username = 'admin';
-```

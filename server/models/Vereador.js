@@ -19,8 +19,17 @@ class Vereador {
     static async read(id = null) {
         try {
             let query = `
-                SELECT v.id, v.partido, v.sigla_partido, v.ativo AS vereador_ativo,
-                       u.id AS user_id, u.nome AS nome_vereador, u.ativo AS usuario_ativo
+                SELECT
+                    v.id,
+                    v.partido,
+                    v.sigla_partido,
+                    v.ativo        AS vereador_ativo,
+                    u.id           AS user_id,
+                    u.nome         AS nome,
+                    CASE 
+                      WHEN u.ativo = 1 THEN 'SIM'
+                      ELSE '0'
+                    END            AS ativo
                 FROM vereadores v
                 JOIN users u ON v.user_id = u.id
             `;
@@ -32,7 +41,6 @@ class Vereador {
             }
     
             const [result] = await pool.query(query, values);
-    
             return { success: true, data: result };
         } catch (error) {
             console.error("Erro ao realizar a leitura:", error);
@@ -140,7 +148,7 @@ class Vereador {
     static async delete(id) {
         try {
             const [result] = await pool.query("DELETE FROM vereadores WHERE id = ?", [id]);
-
+            
             if (result.affectedRows > 0) {
                 return { success: true, message: "Vereador excluído com sucesso!" };
             } else {
