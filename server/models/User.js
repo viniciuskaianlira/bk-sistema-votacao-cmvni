@@ -8,6 +8,7 @@ class User {
   }
 
   static async create(nome, username, password) {
+    console.log(password)
     const hashedPassword = await bcrypt.hash(password, 10); // Hash seguro
     const [result] = await pool.query(
       "INSERT INTO users (nome, username, password) VALUES (?, ?, ?)", 

@@ -1,3 +1,7 @@
+CREATE DATABASE votacao;
+
+USE votacao;
+
 -- 1) Criação das tabelas (sem duplicações e sem ALTERs desnecessários)
 
 CREATE TABLE roles (

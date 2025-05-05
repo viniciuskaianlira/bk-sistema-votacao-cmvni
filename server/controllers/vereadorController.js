@@ -35,17 +35,13 @@ class VereadorController {
               .status(400)
               .json({ success: false, message: 'Este usuário já está cadastrado como vereador nesta legislatura!' })
           }
-    
+        
+          console.log(nome, username, password);
           // 📌 Cria o user e pega o ID retornado
-          const newUserId = await User.create({ nome, username, password })
+          const newUserId = await User.create(nome, username, password);
     
           // 📌 Cria o registro de vereador
-          const newVereadorId = await Vereador.create({
-            user_id:          newUserId,
-            legislatura_id,
-            partido,
-            sigla_partido
-          })
+          const newVereadorId = await Vereador.create(newUserId, legislatura_id, partido, sigla_partido)
     
           return res
             .status(201)
