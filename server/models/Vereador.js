@@ -5,7 +5,7 @@ class Vereador {
     static async create(user_id, legislatura_id, partido, sigla_partido, ativo = true) {
         try {
             const [result] = await pool.query(
-                "INSERT INTO legislatura (user_id, legislatura_id, partido, sigla_partido, ativo) VALUES (?, ?, ?, ?, ?)",
+                "INSERT INTO vereadores (user_id, legislatura_id, partido, sigla_partido, ativo) VALUES (?, ?, ?, ?, ?)",
                 [user_id, legislatura_id, partido, sigla_partido, ativo]
             );
     
@@ -38,6 +38,41 @@ class Vereador {
             console.error("Erro ao realizar a leitura:", error);
             return { success: false, message: "Erro no servidor." };
         }
+    }
+
+    static async readByUserId(user_id) {
+        const sql = `
+          SELECT
+            v.*,
+            u.nome        AS usuario_nome,
+            l.numero      AS legislatura_numero,
+            l.data_inicio AS legislatura_inicio,
+            l.data_fim    AS legislatura_fim
+          FROM vereadores v
+          JOIN users u        ON v.user_id = u.id
+          JOIN legislatura l  ON v.legislatura_id = l.id
+          WHERE v.user_id = ?
+        `;
+    
+        const [rows] = await pool.query(sql, [user_id]);
+        return rows;
+    }
+
+    static async readByUserName(username, legislatura_id) {
+        const sql = `
+          SELECT
+            v.*,
+            u.nome        AS usuario_nome,
+            l.numero      AS legislatura_numero
+          FROM vereadores v
+          JOIN users u        ON v.user_id = u.id
+          JOIN legislatura l  ON v.legislatura_id = l.id
+          WHERE u.username = ?
+            AND v.legislatura_id = ?
+        `;
+    
+        const [rows] = await pool.query(sql, [username, legislatura_id]);
+        return rows;
     }
     
     static async update(id, user_id = null, partido = null, sigla_partido = null, ativo = null, legislatura_id = null) {
