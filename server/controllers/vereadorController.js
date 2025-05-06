@@ -91,7 +91,7 @@ class VereadorController {
                 user_id || null,
                 partido || null,
                 sigla_partido || null,
-                ativo !== undefined ? ativo : null,
+                ativo,
                 legislatura_id || null
             );
 

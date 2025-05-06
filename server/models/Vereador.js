@@ -131,9 +131,9 @@ class Vereador {
             // 📌 Finaliza a query e adiciona o ID no array de valores
             query += updates.join(", ") + " WHERE id = ?";
             values.push(id);
-    
+            
             const [result] = await pool.query(query, values);
-    
+            
             if (result.affectedRows > 0) {
                 return { success: true, message: "Vereador atualizado com sucesso!" };
             } else {
