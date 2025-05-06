@@ -22,6 +22,26 @@ class IndicacaoController {
         }
     }
 
+    static async readByUserId(req, res) {
+        try {
+          const userId = req.params.id
+          const rows = await Indicacao.readByUserId(userId)
+
+          const formatted = rows.map(row => ({
+            ...row,
+            data_criacao: new Date(row.data_criacao)
+                              .toLocaleDateString('pt-BR')
+          }))
+    
+          return res.json(formatted)
+        } catch (err) {
+          console.error('Erro em IndicacaoController.readByUserId:', err)
+          return res
+            .status(500)
+            .json({ message: 'Erro ao buscar indicações do usuário.' })
+        }
+    }
+
     static async update(req, res) {
         const { id } = req.params;
         const { numero, texto, justificativa, usuario_id, promponente_id, protocolo_id } = req.body;

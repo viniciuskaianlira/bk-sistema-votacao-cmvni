@@ -12,8 +12,8 @@ class VereadorController {
             legislatura_id,
             partido,
             sigla_partido
-          } = req.body
-    
+          } = req.body;
+      
           // 📌 Validação básica
           if (
             !nome ||
@@ -25,39 +25,51 @@ class VereadorController {
           ) {
             return res
               .status(400)
-              .json({ success: false, message: 'Todos os campos são obrigatórios!' })
+              .json({ success: false, message: 'Todos os campos são obrigatórios!' });
           }
-    
+      
           // 📌 Verifica se já existe um vereador para esse username + legislatura
-          const existing = await Vereador.readByUserName(username, legislatura_id)
+          const existing = await Vereador.readByUserName(username, legislatura_id);
           if (existing.length > 0) {
             return res
               .status(400)
-              .json({ success: false, message: 'Este usuário já está cadastrado como vereador nesta legislatura!' })
+              .json({ success: false, message: 'Este usuário já está cadastrado como vereador nesta legislatura!' });
           }
-        
-          console.log(nome, username, password);
-          // 📌 Cria o user e pega o ID retornado
-          const newUserId = await User.create(nome, username, password);
-    
+      
+          // 📌 Tenta criar o user
+          let newUserId;
+          try {
+            newUserId = await User.create(nome, username, password);
+          } catch (err) {
+            // ER_DUP_ENTRY = duplicate key error no MySQL
+            if (err.code === 'ER_DUP_ENTRY') {
+              return res
+                .status(400)
+                .json({ success: false, message: 'Este nome de usuário já está em uso!' });
+            }
+            // se for outro erro, deixa subir para o catch geral
+            throw err;
+          }
+      
           // 📌 Cria o registro de vereador
-          const newVereadorId = await Vereador.create(newUserId, legislatura_id, partido, sigla_partido)
-    
+          const newVereadorId = await Vereador.create(newUserId, legislatura_id, partido, sigla_partido);
+      
           return res
             .status(201)
             .json({
               success: true,
               message: 'Vereador cadastrado com sucesso!',
               id:      newVereadorId
-            })
+            });
         }
         catch (error) {
-          console.error('Erro ao cadastrar o vereador:', error)
+          console.error('Erro ao cadastrar o vereador:', error);
           return res
             .status(500)
-            .json({ success: false, message: 'Erro interno do servidor.' })
+            .json({ success: false, message: 'Erro interno do servidor.' });
         }
       }
+      
 
     // 📌 Buscar vereadores (todos ou por ID)
     static async read(req, res) {

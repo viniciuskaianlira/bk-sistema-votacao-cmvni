@@ -32,6 +32,18 @@ class Indicacao {
         }
     }
 
+    static async readByUserId(userId) {
+        const sql = `
+          SELECT id, numero, texto, justificativa, data_criacao,
+                 usuario_id, promponente_id, protocolo_id
+          FROM indicacoes
+          WHERE usuario_id = ?
+          ORDER BY data_criacao DESC
+        `
+        const [rows] = await pool.query(sql, [userId])
+        return rows
+    }
+
     static async update(id, numero = null, texto = null, justificativa = null, usuario_id = null, promponente_id = null, protocolo_id = null) {
         try {
             let updates = [];
