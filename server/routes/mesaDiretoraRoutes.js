@@ -4,9 +4,9 @@ import { authenticate, authorize } from "../middleware/authMiddleware.js"; // Im
 
 const router = express.Router();
 
-router.post("/mesa_diretora", authenticate, authorize(['admin', 'servidor']), MesaDiretoraController.create);
-router.get("/mesa_diretora/:id?", authenticate, authorize(['admin', 'servidor']), MesaDiretoraController.read);
-router.put("/mesa_diretora/:id", authenticate, authorize(['admin', 'servidor']), MesaDiretoraController.update);
-router.delete("/mesa_diretora/:id",  authenticate, authorize(['admin', 'servidor']), MesaDiretoraController.delete);
+router.post("/mesa-diretora", authenticate, authorize(['admin', 'servidor']), MesaDiretoraController.create);
+router.get("/mesa-diretora/:id?", authenticate, authorize(['admin', 'servidor']), MesaDiretoraController.read);
+router.put("/mesa-diretora/:id", authenticate, authorize(['admin', 'servidor']), MesaDiretoraController.update);
+router.delete("/mesa-diretora/:id",  authenticate, authorize(['admin', 'servidor']), MesaDiretoraController.delete);
 
 export default router;

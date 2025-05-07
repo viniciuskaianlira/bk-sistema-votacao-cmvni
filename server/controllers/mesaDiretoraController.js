@@ -1,5 +1,4 @@
 import MesaDiretora from "../models/MesaDiretora.js";
-import Vereador from "../models/MesaDiretora.js";
 
 class MesaDiretoraController {
     static async create(req, res) {
