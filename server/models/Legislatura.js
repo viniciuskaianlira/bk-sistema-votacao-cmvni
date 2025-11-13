@@ -35,6 +35,22 @@ class Legislatura {
         }
     }
 
+    static async readByIdUser(userId) {
+        const sql = `
+          SELECT l.id,
+                 l.numero,
+                 l.data_inicio,
+                 l.data_fim
+          FROM legislatura AS l
+          INNER JOIN vereadores AS v
+            ON v.legislatura_id = l.id
+          WHERE v.user_id = ?
+          ORDER BY l.data_inicio DESC
+        `
+        const [rows] = await pool.query(sql, [userId])
+        return rows
+    }
+
     static async update(id, numero = null, data_inicio = null, data_fim = null) {
             try {
                 // 📌 Verifica se já existe uma legislatura com o mesmo número

@@ -36,6 +36,28 @@ class LegislaturaController {
         }
     }
 
+    static async readByUserId(req, res) {
+        try {
+          const userId = req.params.id
+          // busca os registros puros do DB
+          const rows = await Legislatura.readByIdUser(userId)
+    
+          // formata as datas para DD/MM/YYYY
+          const formatted = rows.map(row => ({
+            ...row,
+            data_inicio: new Date(row.data_inicio)
+                           .toLocaleDateString('pt-BR'),
+            data_fim:    new Date(row.data_fim)
+                           .toLocaleDateString('pt-BR')
+          }))
+    
+          res.json(formatted)
+        } catch (err) {
+          console.error(err)
+          res.status(500).json({ message: 'Erro ao buscar legislaturas do usuário.' })
+        }
+    }
+
     // Atualizar uma legislatura
     static async update(req, res) {
         try {
