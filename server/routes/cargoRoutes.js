@@ -3,7 +3,7 @@ import { getCargos, createCargo } from "../controllers/cargoController.js";
 
 const router = express.Router();
 
-router.get("/", getCargos);
-router.post("/", createCargo);
+router.get("/cargos", getCargos);
+router.post("/cargos", createCargo);
 
 export default router;

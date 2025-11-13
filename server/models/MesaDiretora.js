@@ -53,6 +53,46 @@ class MesaDiretora {
         }
     }
     
+    // 🔎 Buscar mesa diretora por legislatura
+    static async readMesaDiretoraForLegislatura(legislaturaId = null) {
+        try {
+            let query = `
+                SELECT 
+                    md.id, md.ano_legislatura,
+                    l.id AS legislatura_id, l.numero AS numero_legislatura, l.data_inicio, l.data_fim,
+                    p.id AS presidente_id, p.partido AS presidente_partido, u_p.nome AS presidente_nome,
+                    vp.id AS vice_presidente_id, vp.partido AS vice_presidente_partido, u_vp.nome AS vice_presidente_nome,
+                    ps.id AS primeiro_secretario_id, ps.partido AS primeiro_secretario_partido, u_ps.nome AS primeiro_secretario_nome,
+                    ss.id AS segundo_secretario_id, ss.partido AS segundo_secretario_partido, u_ss.nome AS segundo_secretario_nome
+                FROM mesa_diretora md
+                JOIN legislatura l ON md.legislatura_id = l.id
+                JOIN vereadores p ON md.presidente_id = p.id
+                JOIN users u_p ON p.user_id = u_p.id
+                JOIN vereadores vp ON md.vice_presidente = vp.id
+                JOIN users u_vp ON vp.user_id = u_vp.id
+                JOIN vereadores ps ON md.primeiro_secretario = ps.id
+                JOIN users u_ps ON ps.user_id = u_ps.id
+                JOIN vereadores ss ON md.segundo_secretario = ss.id
+                JOIN users u_ss ON ss.user_id = u_ss.id
+            `;
+            const values = [];
+
+            // Se vier um ID de legislatura, filtra por ele
+            if (legislaturaId !== null) {
+                query += " WHERE md.legislatura_id = ?";
+                values.push(legislaturaId);
+            }
+
+            const [result] = await pool.query(query, values);
+
+            return { success: true, data: result };
+        } catch (error) {
+            console.error("Erro ao buscar mesa diretora por legislatura:", error);
+            return { success: false, message: "Erro no servidor." };
+        }
+    }
+
+
     static async update(id, legislatura_id = null, presidente_id = null, vice_presidente = null, primeiro_secretario = null, segundo_secretario = null, ano_legislatura = null) {
         try {
    

@@ -87,8 +87,34 @@ class Legislatura {
                 console.error("Erro ao atualizar:", error);
                 return { success: false, message: "Erro no servidor." };
             }
-        }
+    }
 
+    static async delete(id) {
+        try {
+            const [result] = await pool.query(
+                "DELETE FROM legislatura WHERE id = ?",
+                [id]
+            );
+
+            if (result.affectedRows > 0) {
+                return { success: true, message: "Legislatura excluída com sucesso!" };
+            } else {
+                return { success: false, message: "Legislatura não encontrada." };
+            }
+        } catch (error) {
+            console.error("Erro ao excluir legislatura:", error);
+
+            // Tratando erro de chave estrangeira (quando há registros dependentes)
+            if (error.code === 'ER_ROW_IS_REFERENCED_2' || error.code === 'ER_ROW_IS_REFERENCED') {
+                return {
+                    success: false,
+                    message: "Não é possível excluir a legislatura, pois existem registros vinculados."
+                };
+            }
+
+            return { success: false, message: "Erro no servidor." };
+        }
+    }
  
 }
 

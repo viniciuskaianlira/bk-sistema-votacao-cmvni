@@ -58,6 +58,29 @@ class LegislaturaController {
             return res.status(500).json({ success: false, message: "Erro no servidor." });
         }
     }
+
+    static async delete(req, res) {
+        try {
+            const { id } = req.params;
+
+            if (!id) {
+                return res.status(400).json({ success: false, message: "O ID da legislatura é obrigatório!" });
+            }
+
+            const response = await Legislatura.delete(parseInt(id));
+
+            if (!response.success) {
+                // Se for erro de FK ou não encontrada → 400
+                return res.status(400).json(response);
+            }
+
+            return res.status(200).json(response);
+
+        } catch (error) {
+            console.error("Erro ao excluir legislatura:", error);
+            return res.status(500).json({ success: false, message: "Erro no servidor." });
+        }
+    }
 }
 
 export default LegislaturaController;
